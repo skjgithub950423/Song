@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script type="text/javascript">
+function jsonp(options){
+	if (!options) {return};
+	options = options||{};
+	options.data = options.data||{};
+	options.cbName =options.cbName ||'cb';
+	options.timeout = options.timeout ||10000;
+	var arr = [];
+	var FnName = 'jsonp_'+Math.random();
+	FnName = FnName.replace('.','');
+	options.data[options.cbName] = FnName;
+	var timer = setTimeout(function(){
+		options.error&&options.error();
+		window[FnName]=null;
+	},options.timeout);
+	for(var name in options.data){
+		arr.push(name+'='+options.data[name]);
+	}
+	window[FnName] = function(json){
+		options.success&&options.success(json);
+		clearTimeout(timer);
+		document.getElementsByTagName('head')[0].removeChild(oS);
+	}
+	var oS = document.createElement('script');
+	oS.src = options.url+'?'+arr.join('&');
+	document.getElementsByTagName('head')[0].appendChild(oS);
+}
+window.onload = function(){
+	var oTxt = document.getElementById('txt');
+	oTxt.onkeyup = function(){
+		jsonp({
+			url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+		data:{
+			wd:oTxt.value
+		},
+		cbName:'cb',
+		success:function(json){
+			var arr = json.s;
+			var oUl = document.getElementById('ul1');
+			oUl.innerHTML = '';
+			for(var i = 0;i<arr.length;i++){
+				var oLi = document.createElement('li');
+				oLi.innerHTML = arr[i];
+				oUl.appendChild(oLi);
+				}
+			}
+		});
+	}
+}
+</script>
+</head>
+<body>
+	<input type="text" id="txt">
+	<ul id="ul1">
+
+	</ul>
+</body>
+</html>
