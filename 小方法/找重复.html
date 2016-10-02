@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+var arr = [1,2,4,5,7,9,3,5,7,0];
+
+
+function findInArr(n,arr){
+	for(var i = 0; i < arr.length; i++){
+		if(n == arr[i]){
+			return '找到了重复的';	
+		}
+	}
+	return '没找到重复的';
+}
+
+alert(findInArr(3,arr));
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

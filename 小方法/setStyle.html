@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#box {
+	width: 100px;
+	height: 100px;
+	background: red;
+}
+</style>
+<script>
+function setStyle(){
+	var obj = arguments[0];	
+	if(arguments.length == 3){
+		var name = arguments[1];
+		var value = arguments[2];
+		obj.style[name] = value;
+	}else{
+		var json = arguments[1];
+		for(var name in json){
+			obj.style[name] = json[name];	
+		}
+	}
+}
+window.onload = function(){
+	var oBox = document.getElementById('box');
+	oBox.onclick = function(){
+		setStyle(oBox,'width','200px');
+		/*setStyle(oBox,{
+			width:'200px',
+			height: '200px',
+			background: 'green'	
+		});	*/	
+	}
+}
+</script>
+</head>
+
+<body>
+<div id="box"></div>
+</body>
+</html>

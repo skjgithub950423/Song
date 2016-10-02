@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#box {
+	width: 300px;
+	height: 300px;
+	background:red;
+}
+</style>
+<script>
+//DOMReady(fn);
+function DOMReady(fn){
+	if(document.addEventListener){
+		document.addEventListener('DOMContentLoaded',function(){//通过事件绑定添加DOMContentLoaded方法;
+			fn && fn();//执行函数;
+		},false);
+	}else{
+		document.attachEvent('onreadystatechange',function(){//通过事件绑定添加onreadystatechange
+			//如果资源加载状态为complete,代表资源加载完成;
+			if(document.readyState == 'complete'){
+				fn && fn();
+			}
+		});
+	}
+}
+DOMReady(function(){
+	var oBox = document.getElementById('box');
+	oBox.onclick = function(){
+		alert('1');	
+	}
+});
+</script>
+</head>
+
+<body>
+<div id="box"></div>
+</body>
+</html>

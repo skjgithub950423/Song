@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+function findInArr(n,arr){
+	for(var i = 0 ;i < arr.length; i++){
+		if(n == arr[i]){
+			return true;	
+		}
+	}
+	return false;
+}
+//oParent:父级  sClass：我们要查找的className
+function getByClass(oParent,sClass){
+	//如果浏览器支持JS自带的获取class的方法就是用JS自带的获取方法;
+	if(oParent.getElementsByClassName){
+		return oParent.getElementsByClassName(sClass);
+	}else{//如果浏览器不支持JS自带的获取class的方法,也就是ie8-
+		//通过oPraent获取所有的元素;
+		var aEle = oParent.getElementsByTagName('*');
+		var arr = [];
+		//循环吧每个元素绳身上的class切割一下，切割完成返回一个数组
+		for(var i = 0; i < aEle.length; i++){
+			var tmp = aEle[i].className.split(' ');	
+			//判断切割完成后的数组里面是否包含我们需要找的className;
+			if(findInArr(sClass,tmp)){
+				//如果包含的话就添加到arr里面;
+				arr.push(aEle[i]);
+			}
+		}
+		return arr;//并且返回arr;
+	}	
+}
+window.onload = function(){
+		
+
+	var aBlue = getByClass(document,'blue');
+	for(var i = 0; i < aBlue.length; i++){
+		aBlue[i].style.background = 'red';	
+	}
+	
+}
+</script>
+</head>
+
+<body>
+<div class="blue">div</div>
+<p class="yellow">p</p>
+<p class="yellow blue">p</p>
+<h1 class="h1">h1</h1>
+<div class="blue red">asas</div>
+</body>
+</html>
