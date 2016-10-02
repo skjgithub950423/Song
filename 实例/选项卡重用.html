@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	#wrap div,#wrap1 div{
+		width: 300px;
+		height: 300px;
+		border: 1px solid black;
+		display: none;
+	}
+	.on{
+		background: red;
+		color: white;
+	}
+	</style>
+<script>
+window.onload=function(){
+	tab('wrap','onclick');
+	tab('wrap1','onmouseover');
+}
+	function tab(id,event){
+	var adiv=document.getElementById(id);
+	var aBtn=adiv.getElementsByTagName('input');
+	var oDiv=adiv.getElementsByTagName('div');
+	for(var i = 0;i < aBtn.length ;i++){
+		aBtn[i].index=i;
+		aBtn[i][event]=function(){
+			for(var i=0;i<aBtn.length;i++){
+				aBtn[i].className="";
+			}
+			this.className="on";
+			for(var i = 0 ; i < oDiv.length ; i++){
+				oDiv[i].style.display="none"
+			}
+			oDiv[this.index].style.display="block";
+		}
+	}
+	/*var adiv1=document.getElementById('wrap1');
+	var aBtn1=adiv1.getElementsByTagName('input');
+	var oDiv1=adiv1.getElementsByTagName('div');
+	for (var i = 0 ; i < aBtn1.length ; i++){
+		aBtn1[i].index=i;
+		aBtn1[i].onmouseover=function(){
+			for(var i = 0 ; i < aBtn1.length ; i++){
+				aBtn1[i].className='';
+			}
+			this.className='on';
+			for(var i = 0 ; i < oDiv1.length ; i++){
+				oDiv1[i].style.display="none";
+			}
+			oDiv1[this.index].style.display="block";
+		}
+	}*/
+}
+</script>
+</head>
+<body>
+	<div id=wrap>
+	<input type="button" value="图片" class="on">
+	<input type="button" value="体育">
+	<input type="button" value="新闻">
+	<div style="display:block">图片</div>
+	<div>体育</div>
+	<div>新闻</div>
+	</div>
+	<div id="wrap1">
+	<input type="button" value="图片" class="on">
+	<input type="button" value="体育">
+	<input type="button" value="新闻">
+	<div style="display:block">图片</div>
+	<div>体育</div>
+	<div>新闻</div>
+	</div>
+	
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload = function(){
+	var oBtn = document.getElementById('btn');
+	var oTxt = document.getElementById('txt');
+	var oBox = document.getElementById('box');
+	function senMessage(){
+		var oLi = document.createElement('li');
+		oLi.innerHTML = oTxt.value + '<a href="javascript:;">删除</a>';
+		if(oBox.children.length){
+			oBox.insertBefore(oLi,oBox.children[0]);	
+		}else{
+			oBox.appendChild(oLi);	
+		}	
+		oTxt.value = '';
+		oLi.children[0].onclick = function(){
+			oBox.removeChild(oLi);	
+		}
+	}
+	oTxt.onkeydown = function(ev){
+		var oEvent = ev || event;
+		if (oEvent.keyCode == 13) {
+			senMessage();
+		}
+	}
+	
+	oBtn.onclick = function(){
+		senMessage();
+	}
+}
+</script>
+</head>
+
+<body>
+<input type="text" value="" id="txt"/>
+<input type="button" value="添加" id="btn" />
+<ul id="box"></ul>
+</body>
+</html>

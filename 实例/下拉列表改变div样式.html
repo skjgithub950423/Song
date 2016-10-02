@@ -1,0 +1,40 @@
+<!Document.html>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title></head>
+	<style>
+		#change{
+			width: 100px;
+			height: 100px;
+			background: black;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var oDiv=document.getElementById('change');
+			var oBtn=document.getElementById('button1');
+			var oTxt=document.getElementById('text1');
+			var oS=document.getElementsByTagName('select')
+			oBtn.onclick=function(){
+				var oval=oS[0].value;
+				var name=oTxt.value;
+				oDiv.style[oval]=name;
+			}
+
+		};
+	</script>
+</head>
+<body>
+<select id="menu">
+<option value="height">height</option>
+<option value="width">width</option>
+<option value="background">background</option>
+</select>
+<input type="text" id="text1">
+<input type="button" value="点我有惊喜" id="button1">
+<div id="change">
+</div>
+</body>
+</html>

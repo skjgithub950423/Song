@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style type="text/css">
+#box{
+	width: 100px;
+	height: 100px;
+	background: red;
+	position: absolute;
+}
+#box1{
+	width: 100px;height: 100px;background: green;position: absolute;left: 200px;
+}
+#box2{
+	width: 100px;height: 100px;background: black;position: absolute;left: 400px;
+}
+
+</style>
+<script type="text/javascript">
+function drag(div){
+	if(!arguments.length)return;
+	this.div = div;
+	this.init();
+	this.disX = 0;
+	this.disY = 0;
+}
+drag.prototype.init = function(){
+	var self = this;
+	console.log(this);
+	this.div.onmousedown = function(ev){
+		self.down(ev);
+		document.onmousemove = function(ev){
+			self.move(ev);
+		}
+		document.onmouseup = function(){
+			self.up();
+		}
+		self.div.setCapture && self.div.setCapture();
+		return false;
+	}
+}
+drag.prototype.move = function(ev){
+	var self = this;
+	var oEvent = ev || event;
+	var l = oEvent.clientX - self.disX;
+	var t = oEvent.clientY - self.disY;
+	self.div.style.left = l + 'px';
+	self.div.style.top = t + 'px';
+}
+drag.prototype.down = function(ev){
+	var self = this;
+	var oEvent = ev||event;
+	self.disX = oEvent.clientX - self.div.offsetLeft;
+	self.disY = oEvent.clientY - self.div.offsetTop;
+}
+drag.prototype.up = function(){
+	document.onmousemove = null;
+	document.onmouseup = null;
+	this.div.releaseCapture && this.div.releaseCapture();
+}
+
+function limitdrag(div){
+	if(!arguments.length)return;
+	drag.call(this,div);
+}
+limitdrag.prototype = new drag();
+limitdrag.prototype.constructor = limitdrag;
+limitdrag.prototype.move = function(ev){
+	drag.prototype.move.call(this);
+	if (this.div.offsetLeft<0) {
+		this.div.style.left = 0;
+	}
+	if (this.div.offsetLeft >= document.documentElement.clientWidth - this.div.offsetWidth) {
+		this.div.style.left = document.documentElement.clientWidth - this.div.offsetWidth + 'px';
+	}
+	if (this.div.offsetTop<0) {
+		this.div.style.top = 0;
+	}
+}
+function borderdrag(div){
+	limitdrag.call(this,div)
+}
+borderdrag.prototype = new limitdrag();
+borderdrag.prototype.constructor = borderdrag;
+borderdrag.prototype.down = function(ev){
+	limitdrag.prototype.down.call(this,ev);
+	this.borderdiv = document.createElement('div');
+	this.borderdiv.style.width = this.div.offsetWidth - 10 +'px';
+	this.borderdiv.style.height = this.div.offsetHeight - 10 + 'px';
+	this.borderdiv.style.position = 'absolute';
+	this.borderdiv.style.left = this.div.offsetLeft + 'px';
+	this.borderdiv.style.top = this.div.offsetTop + 'px';
+	this.borderdiv.style.border = '5px solid #ccc';
+	this.div.parentNode.appendChild(this.borderdiv);
+	console.log(this.div);
+	this.olddiv = this.div;
+	console.log(this.olddiv);
+	this.div = this.borderdiv;
+	console.log(this.div);
+}
+borderdrag.prototype.up = function(){
+	limitdrag.prototype.up.call(this);
+	console.log(this.div);
+	console.log(this.olddiv);
+	this.olddiv.style.left = this.div.offsetLeft + 'px';
+	console.log(this.div.offsetLeft);
+	console.log(this.olddiv.offsetLeft);
+	this.olddiv.style.top = this.div.offsetTop + 'px';
+	this.div.parentNode.removeChild(this.div);
+	this.div = this.olddiv;
+}
+window.onload = function (){
+	var oDiv = document.getElementById('box');
+	var oDiv2 = document.getElementById('box1');
+	var oDiv3 = document.getElementById('box2');
+	new drag(oDiv);
+	new limitdrag(oDiv2);
+	new borderdrag(oDiv3);
+}
+</script>
+</head>
+<body>
+	<div id="box" class='aaa'></div>
+	<div id="box1"></div>
+	<div id="box2"></div>
+</body>
+</html>

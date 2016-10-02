@@ -1,0 +1,30 @@
+<!Document html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+<script>
+	window.onload=function(){
+		var oBtn=document.getElementById('btn1');
+		var oTxt1=document.getElementById('txt1');
+		var oTxt2=document.getElementById('txt2');
+		oBtn.onclick=function(){
+			var n1=Number(oTxt1.value);
+			var n2=Number(oTxt2.value);
+			if(isNaN(n1)||isNaN(n2)){
+				//isNaN用来判断是不是不是一个number
+				alert('数字有误');
+			}else{
+				alert(n1+n2);
+			}
+		}
+	}
+</script>
+</head>
+<body>
+	<input type="text" id="txt1">+
+	<input type="text" id="txt2">
+	<input type="button" value="求和" id="btn1">
+</body>
+</html>

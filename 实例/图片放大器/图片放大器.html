@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	#small{
+		width: 400px;
+		height: 400px;
+		position: relative;
+		float: left;
+	}
+	#small img{
+		width: 400px;
+		height: 400px;
+	}
+	#mask{
+		top: 0;
+		left: 0;
+		width: 80px;
+		height: 80px;
+		background: yellow;
+		opacity: .5;
+		position: absolute;
+		display: none;
+	}
+	#big{
+		float: left;
+		width: 400px;
+		height: 400px;
+		overflow: hidden;
+		margin-left:10px;
+		position: relative;
+		display: none;
+	}
+	#big img{
+		position: absolute;
+	}
+</style>
+	<title></title>
+<script type="text/javascript">
+window.onload = function(){
+	var oSmall = document.getElementById('small');
+	var oSmImg = oSmall.getElementsByTagName('img')[0];
+	var oMask = document.getElementById('mask');
+	var oBig = document.getElementById('big');
+	var oBigImg = oBig.getElementsByTagName('img')[0];
+	oSmall.onmouseover = function(){
+		oMask.style.display = 'block';
+		oBig.style.display = 'block';
+	}
+	oSmall.onmouseout = function(){
+		oMask.style.display = 'none';
+		oBig.style.display = 'none';
+	}
+	oSmall.onmousemove = function(ev){
+		var oEvent = ev || event;
+		var l = oEvent.clientX - oMask.offsetWidth/2;
+		var t = oEvent.clientY - oMask.offsetHeight/2;
+		if (l < 0) {
+			l = 0;
+		}else if (l >= oSmall.offsetWidth - oMask.offsetWidth) {
+			l = oSmall.offsetWidth - oMask.offsetWidth;
+		}
+		if (t < 0) {
+			t = 0;
+		}else if (t >= oSmall.offsetHeight - oMask.offsetHeight) {
+			t = oSmall.offsetHeight - oMask.offsetHeight;
+		}
+		oMask.style.left = l + 'px';
+		oMask.style.top = t + 'px';
+		oBigImg.style.left = -l/(oSmall.offsetWidth - oMask.offsetWidth)*(oBigImg.offsetWidth - oBig.offsetWidth)+'px';
+		oBigImg.style.top = -t/(oSmall.offsetHeight - oMask.offsetHeight)*(oBigImg.offsetHeight - oBig.offsetHeight)+'px';
+	}
+}
+</script>
+</head>
+<body>
+<div id="small">
+	<img src="./image/s.jpg">
+	<span id="mask"></span>
+</div>
+<div id="big">
+	<img src="./image/b.jpg">
+</div>
+</body>
+</html>

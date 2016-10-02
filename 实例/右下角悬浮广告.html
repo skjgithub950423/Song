@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style>
+	#box{
+		width: 100px;
+		height:100px;
+		background: red;
+		position:fixed;
+		right:0;
+		bottom: 0;
+	}
+</style>
+<script type="text/javascript">
+if(window.navigator.userAgent.indexOf('MSIE 6.0')!=-1){
+	window.onload = window.onscroll = window.onresize = function(){
+		var oDiv = document.getElementById('box');
+		var scrollT = document.documentElement.scrollTop || document.body.scrollTop;
+		var clientH = document.documentElement.clientHeight;
+		var objH = oDiv.offsetHeight;
+		oDiv.style.top = scrollTop + clientH - objH + "px"; 
+	}	
+}
+</script>
+</head>
+<body style="height:3000px;">
+<div id="box"></div>
+</body>
+</html>

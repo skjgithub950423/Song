@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+<style>
+#box{ border:1px dashed #000; width:300px; height:150px; margin:50px auto; position:relative;}
+#box strong{ width:100px; height:30px; position:absolute; right:0; top:0; text-align:center; border:1px solid #ccc; line-height:30px; background:#ddd;}
+#box strong.on{ background:red; color:#fff;}
+#box span{ width:100%; height:30px; position:absolute; bottom:0; left:0; text-align:center; line-height:30px;}
+</style>
+<script>
+window.onload = function (){
+	var oBox = document.getElementById('box');
+	var aStr = oBox.getElementsByTagName('strong')[0];
+	var aSpn = oBox.getElementsByTagName('span')[0];
+	var timer = null;
+	var timer1 = null;
+	var count = 5;
+	var count2 = 5;
+	timer = setInterval(function(){
+		count--;
+		aSpn.innerHTML = count + '秒后拍卖';
+		if(count==0){
+			aStr.innerHTML = '正在拍卖';
+			clearInterval(timer);
+			timer1 =setInterval(function(){
+				count2--;
+				aSpn.innerHTML = '距离拍卖结束还有'+ parseInt(count2/60) + '分' + parseInt(count2%60) + '秒';
+				if(count2==0){
+					aSpn.innerHTML = '拍卖结束';
+					aStr.innerHTML = '拍卖结束';
+					clearInterval(timer1);
+				}
+			},1000)
+		}
+	},1000)
+}
+</script>
+</head>
+
+<body>
+<div id="box">
+	<strong>xxx</strong>
+    <span>xxx</span>
+</div>
+</body>
+</html>

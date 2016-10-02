@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+#box{
+	width: 100%;
+	float: left;
+}
+#box ul{
+	width: 20%; 
+	margin-right:10px;
+	float: left;
+	text-align: center;
+	border: 1px solid grey; 
+}
+#box ul li{
+	width: 95%;
+	list-style: none;
+	margin: 10px;
+}
+</style>
+	<title></title>
+<script type="text/javascript">
+function rnb(n,m){
+	return parseInt(Math.random()*(m-n)+n);
+}
+function createLi(){
+	var oLi = document.createElement('li');
+	oLi.style.height = rnb(50,400) + 'px';
+	var r = rnb(0,256);
+	var g = rnb(0,256);
+	var b = rnb(0,256);
+	oLi.style.background = 'rgb('+r+','+g+','+b+')';
+	return oLi;
+}
+window.onload = function(){
+	var oDiv = document.getElementById('box');
+	var oUl = oDiv.children;
+	function createLi20(){
+			for (var i = 0; i < 20; i++) {
+				 var aLi = createLi();
+				 var arrUl = [];
+				 for(var j = 0 ;j < oUl.length; j ++){
+				 	arrUl.push(oUl[j]);
+				 }
+				 arrUl.sort(function(n1,n2){
+				 	return n1.offsetHeight - n2.offsetHeight;
+				 });
+				 arrUl[0].appendChild(aLi);
+			}
+		}
+		createLi20();
+		window.onscroll = function(){
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			var clientH = document.documentElement.clientHeight;
+			if(oDiv.scrollHeight - 300 <= scrollTop + clientH){
+			createLi20();	
+			}
+		}
+	}
+</script>
+</head>
+<body>
+<div id="box">
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+	<ul></ul>
+</div>
+</body>
+</html>

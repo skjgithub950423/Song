@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#box{
+	background: grey;
+	height: 500px;
+	width: 500px;
+	position: absolute;
+}
+.l{
+	width: 30px;
+	height:100%;
+	background: green;
+	position: absolute;
+}
+.r{
+	width: 30px;
+	height:100%;
+	right: 0;
+	background: green;
+	position: absolute;
+}
+.t{
+	width: 100%;
+	height: 30px;
+	top: 0;
+	position: absolute;
+	background: green;
+}
+.b{
+	width: 100%;
+	height: 30px;
+	background: green;
+	position: absolute;
+	bottom: 0;
+}
+.lt{
+	width: 30px;
+	height: 30px;
+	background: red;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.rt{
+	width: 30px;
+	height: 30px;
+	background: red;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+.lb{
+	width: 30px;
+	height: 30px;
+	background: red;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+.rb{
+	width: 30px;
+	height: 30px;
+	background: red;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+</style>
+<script>
+window.onload = function(){
+	var oBox = document.getElementById('box');
+	var aDiv = oBox.children;
+	for (var i = 0; i < aDiv.length; i++) {
+		drag(aDiv[i],oBox);
+	}
+function drag(obj1,obj2){
+			obj1.onmousedown = function(ev){
+			var oEvent = ev || event;
+			var downX = oEvent.clientX;
+			var downY = oEvent.clientY;
+			var oldW = obj2.offsetWidth;
+			var oldH = obj2.offsetHeight;
+			if (obj1.className.indexOf('l')!= -1) {
+				var oldL = obj2.offsetLeft;
+			}
+			if (obj1.className.indexOf('t')!= -1) {
+				var oldT = obj2.offsetTop;
+			}
+			document.onmousemove = function(ev){
+				var oEvent = ev || event;
+				var moveX = oEvent.clientX;
+				var moveY = oEvent.clientY;
+				var changeW = moveX - downX;
+				var changeH = moveY - downY;
+				if (obj1.className.indexOf('l')!= -1) {
+					obj2.style.width = oldW - changeW + 'px';
+					obj2.style.left = oldL + changeW + 'px'; 
+				}
+				if (obj1.className.indexOf('r')!= -1) {
+					obj2.style.width = oldW + changeW + 'px';
+				}
+				if (obj1.className.indexOf('t')!= -1) {
+					obj2.style.height = oldH - changeH + 'px';
+					obj2.style.top = oldT + changeH + 'px';
+				}
+				if (obj1.className.indexOf('b')!= -1) {
+					obj2.style.height = oldH + changeH + 'px';
+				}
+			}
+			document.onmouseup = function(){
+				document.onmousemove = null;
+				document.onmouseup = null;
+				obj2.releaseCapture && obj2.releaseCapture();
+			}
+			obj2.setCupture && obj2.setCupture();
+			return false;
+		}
+	}
+	/*var l = document.getElementById('l');
+	var r = document.getElementById('r');
+	var t = document.getElementById('t');
+	var b = document.getElementById('b');
+	var lt = document.getElementById('lt');
+	var rt = document.getElementById('rt');
+	var lb = document.getElementById('lb');
+	var rb = document.getElementById('rb');
+	r.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		document.onmousemove =function(ev){
+			var oEvent = ev || event;
+			var moveX = oEvent.clientX - downX;
+			var	newW = oldW + moveX;
+			oBox.style.width = newW + 'px';
+		}
+		document.onmouseup = function(ev){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+	b.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downY = oEvent.clientY;
+		var oldH = oBox.offsetHeight;
+		document.onmousemove =function(ev){
+			var oEvent = ev || event;
+			var moveY = oEvent.clientY - downY;
+			var	newH = oldH + moveY;
+			oBox.style.height = newH + 'px';
+		}
+		document.onmouseup = function(ev){
+			document.onmousemove = null;
+			document.onmouseup = null;
+		}
+		return false;
+	}
+	l.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		var oldL = oBox.offsetLeft;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var moveX = oEvent.clientX;
+			var changeW = moveX - downX;
+			oBox.style.width = oldW - changeW + 'px';
+			oBox.style.left = oldL + changeW + 'px';  
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+	t.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var oldH = oBox.offsetHeight;
+		var oldT = oBox.offsetTop;
+		var downY = oEvent.clientY;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var moveY = oEvent.clientY;
+			var changeH = moveY - downY;
+			oBox.style.top = oldT + changeH + 'px';
+			oBox.style.height = oldH - changeH + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+	rb.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		var downY = oEvent.clientY;
+		var oldH = oBox.offsetHeight;
+		document.onmousemove =function(ev){
+			var oEvent = ev || event;
+			var moveX = oEvent.clientX - downX;
+			var	newW = oldW + moveX;
+			var moveY = oEvent.clientY - downY;
+			var	newH = oldH + moveY;
+			oBox.style.height = newH + 'px';
+			oBox.style.width = newW + 'px';
+		}
+		document.onmouseup = function(ev){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+	lb.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		var oldL = oBox.offsetLeft;
+		var downY = oEvent.clientY;
+		var oldH = oBox.offsetHeight;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var moveX = oEvent.clientX;
+			var changeW = moveX - downX;
+			var moveY = oEvent.clientY - downY;
+			var	newH = oldH + moveY;
+			oBox.style.height = newH + 'px';
+			oBox.style.width = oldW - changeW + 'px';
+			oBox.style.left = oldL + changeW + 'px';  
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false
+	}
+	lt.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		var oldL = oBox.offsetLeft;
+		var oldH = oBox.offsetHeight;
+		var oldT = oBox.offsetTop;
+		var downY = oEvent.clientY;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var moveX = oEvent.clientX;
+			var changeW = moveX - downX;
+			var moveY = oEvent.clientY;
+			var changeH = moveY - downY;
+			oBox.style.top = oldT + changeH + 'px';
+			oBox.style.height = oldH - changeH + 'px';
+			oBox.style.width = oldW - changeW + 'px';
+			oBox.style.left = oldL + changeW + 'px';  
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+	rt.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var oldH = oBox.offsetHeight;
+		var oldT = oBox.offsetTop;
+		var downY = oEvent.clientY;
+		var downX = oEvent.clientX;
+		var oldW = oBox.offsetWidth;
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var moveY = oEvent.clientY;
+			var changeH = moveY - downY;
+			var moveX = oEvent.clientX - downX;
+			var	newW = oldW + moveX;
+			oBox.style.width = newW + 'px';
+			oBox.style.top = oldT + changeH + 'px';
+			oBox.style.height = oldH - changeH + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup = null;
+			oBox.releaseCapture && oBox.releaseCapture();
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}*/
+}
+</script>
+	<title></title>
+</head>
+<body>
+<div id="box">
+	<div class="l"></div>
+	<div class="r"></div>
+	<div class="t"></div>
+	<div class="b"></div>
+	<div class="lt"></div>
+	<div class="rt"></div>
+	<div class="lb"></div>
+	<div class="rb"></div>
+</div>
+</body>
+</html>

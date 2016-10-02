@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script>
+		window.onload=function(){
+			var oVal1=document.getElementById('txt1');
+			var oVal2=document.getElementById('txt2');
+			var oSet=document.getElementById('set');
+			var oBtn=document.getElementById('btn');
+			oBtn.onclick=function(){
+				var value1=Number(oVal1.value);
+				var value2=Number(oVal2.value);
+				var n3=oSet.value;
+				var sum=value1+n3+value2;
+				alert(eval(sum));
+				/*switch(n3){
+					case'+':
+					alert(value1+value2);
+					break;
+					case'-':
+					alert(value1-value2);
+					break;
+					case'*':
+					alert(value1*value2);
+					break;
+
+				}*/
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="txt1">
+	<select id="set">
+	<option value="+">+</option>
+	<option value="-">-</option>
+	<option value="*">*</option>
+	</select>
+	<input type="text" id='txt2'>
+	<input type="button" value="计算" id="btn">
+</body>
+</html>

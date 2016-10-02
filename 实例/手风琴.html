@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{
+	margin: 0;
+	padding: 0
+}
+ul{
+	width: 700px;
+	height: 400px;
+	list-style: none;
+	position: relative;
+	overflow: hidden;
+}
+ul li{
+	width: 700px;
+	height: 400px;
+	position: absolute;
+}
+</style>
+<script src='move-end.js'></script>
+<script type="text/javascript">
+window.onload = function(){
+	var aLi = document.getElementsByTagName('li');
+	var w = 40;
+	for (var i = 1; i < aLi.length; i++) {
+		aLi[i].style.left = aLi[0].offsetWidth - (aLi.length - i) * w + 'px';
+	}
+	for(var i = 0;i < aLi.length; i ++){
+		aLi[i].index = i;
+		aLi[i].onmouseover = function(){
+			for (var i = 0; i < aLi.length; i++) {
+				if (i<=this.index) {
+					move(aLi[i],{left:i*w});
+				}else{
+					move(aLi[i],{left:aLi[0].offsetWidth - (aLi.length - i) * w})
+				}
+			}
+		}
+	}
+}
+</script>
+	<title></title>
+</head>
+<body>
+<ul>
+	<li style="background:pink"></li>
+	<li style="background:red"></li>
+	<li style="background:yellow"></li>
+	<li style="background:green"></li>
+	<li style="background:black"></li>
+	<li style="background:grey"></li>
+	<li style="background:blue"></li>
+</ul>
+</body>
+</html>

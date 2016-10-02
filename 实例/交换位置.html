@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+<script type="text/javascript">
+window.onload = function(){
+	var oBox = document.getElementById('box');
+	var aLi = oBox.getElementsByTagName('li');
+	for (var i = 0; i < aLi.length; i++) {
+		var up = aLi[i].getElementsByTagName('a')[0];
+		var down = aLi[i].getElementsByTagName('a')[1];
+		up.onclick = function(){
+			var obj = this.parentNode;
+			var oPrev = obj.previousElementSibling || obj.previousSibling;
+			if(obj == oBox.children[0]){
+				alert('这已经是最上面了');
+				return;
+			}
+			oBox.insertBefore(obj,oPrev);
+		}
+		down.onclick = function(){
+			var obj = this.parentNode;
+			var oNext = obj.nextElementSibling || obj.nextSibling;
+			if(obj == oBox.children[oBox.children.length-1]){
+				alert('已经是最下面了');
+				return;
+			}
+			oBox.insertBefore(oNext,obj);
+		}
+	}
+}
+</script>
+</head>
+<body>
+<ul id="box"><li>
+	<a href="javascript:;">上移</a>
+	<span>111</span>
+	<a href="javascript:;">下移</a>
+</li>
+
+<li>
+	<a href="javascript:;">上移</a>
+	<span>222</span>
+	<a href="javascript:;">下移</a>
+</li>
+<li>
+	<a href="javascript:;">上移</a>
+	<span>333</span>
+	<a href="javascript:;">下移</a>
+</li>
+<li>
+	<a href="javascript:;">上移</a>
+	<span>444</span>
+	<a href="javascript:;">下移</a>
+</li>
+<li>
+	<a href="javascript:;">上移</a>
+	<span>555</span>
+	<a href="javascript:;">下移</a>
+</li>
+</ul>
+</body>
+</html>
