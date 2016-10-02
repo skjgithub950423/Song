@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+	<script>
+	window.onload=function () {
+		function todouble(n){
+			if(n<10){
+				return '0' + n ;
+			}else{
+				return '' + n ;
+			}
+		}
+		var otxt=document.getElementById('txt1');
+		var obtn1=document.getElementById('btn1');
+		var obtn2=document.getElementById('btn2');
+		var count='';
+		var timer = null ;
+		obtn1.onclick=function(){
+			clearInterval(timer);
+			timer=setInterval(function(){
+			var time = count++ ;
+			otxt.value=todouble(parseInt(time/60)) + ":" +todouble( parseInt(time%60));
+			},100);
+		}
+				obtn2.onclick=function(){
+					clearInterval(timer);
+		}
+	}
+	</script>
+</head>
+<body>
+<input type="text" id="txt1">
+<input type="button" id="btn1" value="开始">
+<input type="button" id="btn2" value="暂停">
+</body>
+</html>

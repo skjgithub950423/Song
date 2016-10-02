@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<meta charset="utf-8">
+<style>
+.active{
+	background: red;
+	color: white;
+}
+div{
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	display: none;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aBtn = document.getElementsByTagName('input');
+	var aDiv = document.getElementsByTagName('div');
+	console.log(aDiv);
+	for (var i = 0;i < aBtn.length; i++){
+		aBtn[i].index = i;
+		aBtn[i].onclick = function(){
+			for (var i = 0; i < aBtn.length; i++) {
+				aBtn[i].className = '';
+				aDiv[i].style.display = 'none';
+			}
+			this.className = 'active';
+			aDiv[this.index].style.display = 'block';
+		}
+	}																					
+}
+/*function tab(btn,div){
+	this.btn = btn;
+	this.div = div;
+}
+tab.prototype.init = function(){
+	var self = this;
+	for (var i = 0; i < this.btn.length; i++) {
+		this.btn[i].index = i;
+		this.btn[i].onclick = function(){
+			for (var i = 0; i < self.btn.length; i++) {
+				self.space();
+				self.current(this.index);
+			}
+		}
+	}
+}
+tab.prototype.space = function(){
+	for (var i = 0; i < this.btn.length; i++) {
+		this.btn[i].className = '';
+		this.div[i].style.display = 'none';
+	}
+}
+tab.prototype.current = function(index){
+	this.btn[index].className = 'active';
+	this.div[index].style.display = 'block';
+}
+window.onload = function(){
+	var aBtn = document.getElementsByTagName('input');
+	var aDiv = document.getElementsByTagName('div');
+	var obj = new tab(aBtn,aDiv);
+	obj.init();
+}*/
+</script>
+</head>
+<body>
+<input type="button" value="aaa" class="active">
+<input type="button" value="bbb">
+<input type="button" value="ccc">
+<div style="display:block">111</div>
+<div>222</div>
+<div>333</div>
+</body>
+</html>

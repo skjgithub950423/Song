@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div{
+	width: 100px;
+	height: 100px;
+	background: red;
+	margin: 15px 0;
+	opacity: .2;
+}
+</style>
+<script>
+function getStyle(obj,name){
+	if (obj.currentStyle) {
+		return obj.currentStyle[name];
+	}else{
+		return getComputedStyle(obj,false)[name];
+	}
+}
+function move(obj,json,time,fn){
+	clearInterval(obj.timer);
+	var start = {};
+	var dis = {};
+	for(var name in json){
+		start[name] = parseFloat(getStyle(obj,name));
+		dis[name] = json[name] - start[name];
+	}
+	var count = parseInt(time/30);
+	var n =0;
+	obj.timer = setInterval(function(){
+		n++;
+		for(var name in json){
+			var cur = start[name] + n * dis[name]/count;
+			console.log(cur);
+			if (name == 'opacity') {
+				obj.style.opacity = cur;
+				obj.style.filter = 'alpha(opacity:'+cur*100+')';
+			}else{
+				obj.style[name] = cur + 'px';
+			}
+		}
+		if (n == count) {
+			clearInterval(obj.timer);
+			fn &&fn();
+		}
+	},30);
+}
+window.onload = function(){
+	var aDiv = document.getElementsByTagName('div');
+	for (var i = 0; i < aDiv.length; i++) {
+		aDiv[i].onmouseover = function(){
+			move(this,{opacity:.5,width:500},1000);
+		}
+		aDiv[i].onmouseout = function(){
+			move(this,{opacity:1,width:500},1000);
+		}
+	}
+}
+</script>
+	<title></title>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

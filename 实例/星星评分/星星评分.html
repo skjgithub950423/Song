@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<meta name="description" content="智能社是一家专注于web前端开发技术的公司，目前主要提供JavaScript培训和HTML5培训两项服务，同时还推出了大量javascript基础知识教程，智能课堂为你带来全新的学习方法和快乐的学习体验。" />
+<title>智能社— http://www.zhinengshe.com</title>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+#ul1{ width:200px; margin:100px auto;}
+#ul1 li.left{ width:14px; height:27px; background:url(./image/star.gif) no-repeat 0 0; float:left;}
+#ul1 li.right{ width:14px; height:27px; background:url(./image/star.gif) no-repeat -14px 0; float:left;}
+
+#ul1 li.left_on{ width:14px; height:27px; background:url(./image/star.gif) no-repeat 0 -29px; float:left;}
+#ul1 li.right_on{ width:14px; height:27px; background:url(./image/star.gif) no-repeat -14px -29px; float:left;}
+</style>
+<script>
+window.onload = function () {
+    var aLi = document.getElementsByTagName('li');
+    for (var i = 0; i < aLi.length; i++) {
+        if(i%2 == 0 ){
+            aLi[i].className = 'left';
+        }else{
+            aLi[i].className = 'right';
+        }
+        aLi[i].index = i ;
+        aLi[i].onmouseover = function () {              
+                    for (var i = 0; i <= this.index; i++) {
+                        if (i%2 == 0) {
+                            aLi[i].className = 'left_on';
+                        }else{
+                            aLi[i].className = 'right_on';
+                        }
+                    }
+                    for (var j = this.index+1; i < aLi.length; i++) {
+                        if(i%2 == 0){
+                            aLi[i].className = 'left';
+                        }else{
+                         aLi[i].className = 'right';                           
+                        }
+                    }
+                }
+                aLi[0].onmouseout = function(){
+                    aLi[0].className = 'left';
+                }
+            //}
+        }
+    }
+</script>
+</head>
+
+<body>
+<ul id="ul1">
+	<li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

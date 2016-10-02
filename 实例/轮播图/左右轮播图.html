@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	div{
+		position: relative;
+		height: 305px;
+		width:840px;
+		overflow: hidden;
+	}
+	ol{
+		width: 100%;
+		position: absolute;
+		left: 600px;
+		bottom: 10px;
+		z-index: 99;
+	}
+	ol li{
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+		background: grey;
+		float: left;
+		z-index: 1;
+	}
+	ul{
+		height:100%;
+		width:3360px;
+		position: absolute;
+	}
+	ul li{
+		width: 840px;
+		float: left;
+		height: 100%;
+	}
+	.active{
+		background: red;
+	}
+</style>
+	<title></title>
+
+<script>
+function getstyle(obj,name){
+		if (obj.currentstyle) {
+			return obj.currentstyle[name];
+		}else{
+			return getComputedStyle(obj,false)[name];
+		}
+	}
+function move(obj,json,complete){
+	clearInterval(obj.timer);
+	complete = complete || {};
+	complete.time = complete.time || 3000;
+	complete.easeing = complete.easeing || 'linear';
+	var start = {};
+	var dis = {};
+	for(var name in json){
+		start[name] = parseFloat(getstyle(obj,name));
+		dis[name] = json[name] - start[name];
+	}
+	var count = parseInt(complete.time/30);
+	var n = 0;
+	obj.timer = setInterval(function(){
+		n ++;
+		for(var name in json){
+			switch(complete.easeing){
+				case 'linear':
+				var a = n/count;
+				var cur = start[name] + dis[name]*a;
+				break;
+				case 'ease-in':
+				var a = n/count;
+				var cur = start[name] + dis[name]*a*a*a;
+				break;
+				case'ease-out':
+				var a =1- n/count;
+				var cur = start[name] + dis[name]*(1-a*a*a);
+				break;
+			}
+			if (name == 'opacity') {
+				obj.style.opacity = cur;
+				obj.style.filter = 'alpha(opacity:'+cur*100+')';
+			}else{
+				obj.style[name] = cur + 'px';
+			}
+		}
+			if (n == count) {
+			clearInterval(obj.timer);
+			complete.fn && complete.fn();
+			}
+		},30);
+}
+window.onload = function(){
+	var aBtn = document.getElementById('btn').getElementsByTagName('li');
+	var aPic = document.getElementById('pic');
+	var ali = aPic.getElementsByTagName('img');
+	for (var i = 0; i < aBtn.length; i++) {
+		(function(index){
+			aBtn[i].onmouseover = function(){
+				for (var i = 0; i < aBtn.length; i++) {
+					aBtn[i].className = '';
+				}
+			this.className = 'active';
+			move(aPic,{left:-ali[0].offsetWidth*index},{time:500})
+			}
+		})(i);
+	}
+}
+</script>
+</head>
+<body>
+<div id="box">
+	<ol id="btn">
+	<li class="active"></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	</ol>
+	<ul id="pic">
+	<li><img src="0.jpg"></li>
+	<li><img src="1.jpg"></li>
+	<li><img src="2.jpg"></li>
+	<li><img src="3.jpg"></li>
+	</ul>
+</div>
+</body>
+</html>

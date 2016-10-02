@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+#box{
+	width: 200px;
+	height: 200px;
+	position:absolute;
+	left: 0;
+	top: 0;
+	background: red;
+}
+.newDiv{
+	position: absolute;
+	border: 1px solid black;
+}
+</style>
+	<title></title>
+<script type="text/javascript">
+window.onload = function(){
+	var oBox = document.getElementById('box');
+	document.onmousedown = function(ev){
+		var oEvent = ev || event;
+		var disX = oEvent.clientX - oBox.offsetLeft;
+		var disY = oEvent.clientY - oBox.offsetTop;
+		var oNewDiv = document.createElement('div');
+		oNewDiv.className = 'newDiv';
+		oNewDiv.style.width = oBox.offsetWidth - 2 +'px';
+		oNewDiv.style.height = oBox.offsetHeight - 2 + 'px';
+		oNewDiv.style.left = oBox.offsetLeft +'px';
+		oNewDiv.style.top = oBox.offsetTop + 'px';
+		oBox.parentNode.appendChild(oNewDiv);
+		document.onmousemove = function(ev){
+			var oEvent = ev || event;
+			var l = oEvent.clientX - disX;
+			var t = oEvent.clientY - disY;
+			oNewDiv.style.left = l + 'px';
+			oNewDiv.style.top = t + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = null;
+			document.onmouseup =null;
+			oBox.style.left = oNewDiv.offsetLeft + 'px';
+			oBox.style.top = oNewDiv.offsetTop + 'px';
+			oBox.releaseCapture && oBox.releaseCapture();
+			oBox.parentNode.removeChild(oNewDiv);
+		}
+		oBox.setCapture && oBox.setCapture();
+		return false;
+	}
+}
+</script>
+</head>
+<body>
+<div id="box"></div>
+</body>
+</html>

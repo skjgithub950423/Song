@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+#img-box{
+	position: absolute;
+}
+/* #img-box li{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+} */
+#box{
+	width: 840px;
+	height: 308px;
+	position: relative;
+	overflow: hidden;
+}
+#select{
+	position: absolute;
+	left: 50%;
+    margin-left: -240px;
+    bottom: 10px;
+}
+#select:after{
+	content: '';
+	height: 0;
+	clear: both;
+	display: block;
+	visibility: hidden;
+}
+#select li{
+	background: grey;
+	margin: 10px;
+	float: left;
+	width: 100px;
+	height: 30px;
+}
+#select li span{
+	width: 0;
+	display: block;
+	background: red;
+	height: 30px;
+}
+</style>
+	<title></title>
+<script src='move-end.js'></script>
+<script type="text/javascript">
+window.onload = function(){
+	var oImg = document.getElementById('img-box');
+	var aLi = oImg.getElementsByTagName('li');
+	var oSel = document.getElementById('select');
+	var aSpan = oSel.getElementsByTagName('span');
+	var iNow = 0;
+	function next(){
+		for (var i = iNow; i < aSpan.length; i++) {
+			move(aSpan[iNow],{width:100},{fn:function(){
+				iNow++;
+				for (var i = 0; i < aSpan.length; i++) {
+					aSpan[i].style.width = 0;
+				}
+				if (iNow==aSpan.length) {
+					iNow = 0;
+				}
+				move(oImg,{top:-aLi[0].offsetHeight*iNow},{fn:next});
+			}});
+		}
+	}
+	next();
+}
+</script>
+</head>
+<body>
+<div id="box">
+	<ul id="img-box">
+	<li><img src="0.jpg"></li>
+	<li><img src="1.jpg"></li>
+	<li><img src="2.jpg"></li>
+	<li><img src="3.jpg"></li>
+	</ul>
+	<ul id="select">
+	<li><span></span></li>
+	<li><span></span></li>
+	<li><span></span></li>
+	<li><span></span></li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<meta charset="utf-8">
+<style>
+.active{
+	background: red;
+	color: white;
+}
+div{
+	width: 300px;
+	height: 300px;
+	border: 1px solid grey;
+	display: none;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var aBtn = document.getElementsByTagName('input');
+	var aDiv = document.body.getElementsByTagName('div');
+	var oPrev = document.getElementsByTagName('a')[0];
+	var oNext = document.getElementsByTagName('a')[1];
+	var count = '';
+	var timer = null;
+		function prev(){
+			count--;
+			if (count == -1) {
+				count = 2;
+			}
+			tab();
+		} 
+		function next(){
+			count++;
+			if(count == aDiv.length){
+				count = 0;
+			}
+			tab();
+		}
+		function tab(){
+			for (var i = 0; i < aBtn.length; i++) {
+				aBtn[i].className = '';
+				aDiv[i].style.display = 'none';
+			}
+			aDiv[count].style.display = 'block';
+			aBtn[count].className = 'active';
+		}
+		oNext.onclick = function(){
+			clearInterval(timer);
+			timer = setInterval(next,300);
+		}
+		oPrev.onclick = function(){
+			clearInterval(timer);
+			timer = setInterval(prev,300);
+		}
+	}
+</script>
+</head>
+<body>
+<a href="javascript:;">上一个</a>
+<input type="button" value="aaa" class="active">
+<input type="button" value="bbb">
+<input type="button" value="ccc">
+<a href="javascript:;">下一个</a>
+<div style="display:block">111</div>
+<div>222</div>
+<div>333</div>
+</body>
+</html>

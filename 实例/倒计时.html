@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+	<title></title>
+<style type="text/css">
+#box1{
+	width: 1000px;
+	height: 1000px;
+}
+</style>
+<script type="text/javascript">
+window.onload = function(){
+	var oDiv = document.getElementById('box1');
+	var oDate = new Date();
+	oDate.setFullYear(2017,2,14);
+	oDate.setHours(0,0,0); 
+	setInterval(change,1000);
+	function change(){
+	var iNow = new Date;
+	var ms = oDate.getTime()-iNow.getTime();
+	var s = parseInt(ms/1000);
+	var d = parseInt(s/86400);
+	s %= 86400;
+	var h = parseInt(s/3600);
+	s %=3600;
+	var m = parseInt(s/60);
+	s %= 60;
+	oDiv.innerHTML = '距离2017年2月14日还剩：' + toDou(d) + '天' + toDou(h) + '小时' + toDou(m) + '分' + toDou(s) + '秒';
+
+}
+}
+function toDou(n){
+		if (n<10) {
+			return '0' + n;
+		}else{
+			return '' + n;
+		}
+	}
+</script>
+</head>
+<body>
+<div id="box1"></div>
+</body>
+</html>

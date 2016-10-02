@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+div{
+	height: 100px;
+	float: left;
+	border: 1px solid black;
+	box-sizing:border-box;  
+}
+</style>
+	<title></title>
+<script type="text/javascript">
+	window.onload = function(){
+		var aDiv = document.getElementsByTagName('div');
+		change();
+		function change(){
+			var oClientW = document.documentElement.clientWidth;
+			if (oClientW < 1920 && oClientW > 1200) {
+				for (var i = 0; i < aDiv.length; i++) {
+					aDiv[i].style.width = '12.5%';
+				}
+			}
+			if (oClientW > 700 && oClientW < 1200) {
+				for (var i = 0; i < aDiv.length; i++) {
+					aDiv[i].style.width = '33.3333333%';
+				}
+			}
+			if (oClientW > 0 && oClientW < 700){
+				for (var i = 0; i < aDiv.length; i++) {
+					aDiv[i].style.width = '50%';
+				}
+			}
+		}
+		window.onresize = change;
+	}
+</script>
+</head>
+<body>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

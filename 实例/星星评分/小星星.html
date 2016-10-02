@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+		#content{
+			list-style-type: none;
+			height: 30px;
+			position:absolute;
+			overflow: hidden;
+		}
+		#content li {
+			float: left;
+			position: relative;
+		}
+		#content li.active{
+			top: -29px;
+		}
+	</style>
+	<script>
+	window.onload = function(){
+		var oCon = document.getElementById('content');
+		var aLi = document.getElementsByTagName('li');
+		var count = '0';
+		for (var i = 0; i < aLi.length; i++) {
+			aLi[i].index = i ;
+			aLi[i].onmouseover = function (){
+						for (var i = 0; i <= this.index; i++) {
+						aLi[i].className = 'active';
+					}
+						for(var j=this.index+1; j<aLi.length; j++) {
+					aLi[j].className='';
+					}
+				}
+
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="wrap">
+	<ul id="content">
+	<li><img src="./image/star.gif"></li>
+	<li><img src="./image/star.gif"></li>
+	<li><img src="./image/star.gif"></li>
+	<li><img src="./image/star.gif"></li>
+	<li><img src="./image/star.gif"></li>
+	</ul>
+</div>
+</body>
+</html>

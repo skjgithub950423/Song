@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#box{
+
+}
+#box ul{
+	overflow: hidden;
+}
+#box ul li{
+	width: 100px;
+	height: 100px;
+	background: grey;
+	list-style: none;
+	float: left;
+	margin: 20px;
+}
+</style>
+	<title></title>
+<script>
+window.onload = function(){
+	var oBox = document.getElementById('box');
+	var ali = oBox.getElementsByTagName('li');
+	oBox.onclick = function(ev){
+		var oEvent = ev || event;
+		var oTarget = oEvent.srcElement || oEvent.target;
+		if (oTarget.tagName == 'LI') {
+			oTarget.style.background = 'red';
+		}
+	}
+}
+</script>
+</head>
+<body>
+<div id="box">
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+</div>
+</body>
+</html>

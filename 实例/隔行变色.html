@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script>
+	window.onload=function(){
+		var ali=document.getElementsByTagName('li');
+		for (var i = 0; i < ali.length; i++) {
+			if (i%2) {
+				ali[i].className='even';
+			}else{
+				ali[i].className='odd';
+			}
+		}
+	}
+	</script>
+	<style>
+	.even{
+		background-color: black;
+	}
+	.odd{
+		background-color: red;
+	}
+	</style>
+</head>
+<body>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</body>
+</html>

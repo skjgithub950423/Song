@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	div{
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+		background: red;
+		margin: 10px;
+		color: white;
+		text-align: center;
+		line-height: 40px;
+		float: left;
+		opacity: 0;
+	}
+</style>
+<meta charset="utf-8">
+	<title></title>
+<script src='move-end.js'></script>
+<script>
+window.onload = function(){
+	var timer = null;
+	var str = '你发撒孔家店哈付款时间发货你发撒孔家店哈付款时间发';
+	for (var i = 0; i < str.length; i++) {
+		var oDiv = document.createElement('div');
+		oDiv.innerHTML = str.charAt(i);
+		document.body.appendChild(oDiv);
+	}
+	var aDiv = document.getElementsByTagName('div');
+	var iNow = 0;
+	timer = setInterval(function(){
+		move(aDiv[iNow],{opacity:1},{time:300});
+		iNow++;
+		if (iNow == aDiv.length) {
+		clearInterval(timer);
+		}
+	},30)
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>
