@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+ *{
+        margin: 0;
+        padding: 0;
+    }
+    .container{
+        height: 200px;
+        padding: 0 200px;
+    }
+    .main{
+        width: 100%;
+        height: 100px;
+        float: left;
+        background-color: red;
+    }
+    .left{
+        width: 200px;
+        height: 200px;
+        float: left;
+        position: relative;
+        left: -200px;
+        margin-left: -100%;
+        background-color: green;
+    }
+    .right{
+        width: 200px;
+        height: 200px;
+        float: left;
+        position: relative;
+        right: -200px;
+        margin-left: -200px;
+        background-color: blue;
+    }
+</style>
+</head>
+<div class="container">
+        <div class="main">
+            <div class="main-con">main</div>
+        </div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css">
+	#tooltip{
+		position: absolute;
+	}
+</style>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='jquery-1.7.2.js'></script>
+	<script type="text/javascript">
+	$(function(){
+		var x = 10;
+		var y = 20;
+		$("a.tooltip").mouseover(function(e){
+			this.myTitle = this.title;
+			this.title = '';
+			var tooltip = "<div id='tooltip'>"+this.myTitle+"</div>";$('body').append(tooltip);
+				$("#tooltip")
+				.css({
+					"top":e.pageY + 'px',
+					"left":e.pageX + 'px'
+				}).show('fast');
+		}).mouseout(function(){
+			this.title = this.myTitle;
+			$("#tooltip").remove();
+		});
+	})
+	</script>
+</head>
+<body>
+	<p><a href="#" class="tooltip" title="提示1">提示1</a></p>
+	<p><a href="#" class="tooltip" title="提示2">提示2</a></p>
+	<p><a href="#" title="自带提示1">自带提示1</a></p>
+	<p><a href="#" title="自带提示2">自带提示2</a></p>
+</body>
+</html>

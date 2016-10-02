@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src='jquery-1.7.2.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$("form :input.required").each(function(){
+			var $required = $("<strong class='high'>*</strong>");
+			$(this).parent().append($required);
+		});
+		$("form :input").blur(function(){
+			var $parent = $(this).parent();
+			if ($(this).is('#username')) {
+				if (this.value = '' || this.value.length < 6) {
+					$parent.find(".formtips").remove();
+					var errorMsg = '请输入至少六位用户名';
+					$parent.append("<span class='formtips errorMsg'>"+errorMsg+"</span>");
+				}
+			}
+		$("form :input").blur(function(){
+			var $parent = $(this).parent();
+			if ($(this).is("#email")) {
+				if (true) {}
+			}
+		})
+		});
+	})
+</script>
+</head>
+<body>
+
+<form method="post" action="">
+	<div class="int">
+		<label for="username">用户名:</label>
+		<input type="text" id="username" class="required" />
+	</div>
+	<div class="int">
+		<label for="email">邮箱:</label>
+		<input type="text" id="email" class="required" />
+	</div>
+	<div class="int">
+		<label for="personinfo">个人资料:</label>
+		<input type="text" id="personinfo" />
+	</div>
+	<div class="sub">
+		<input type="submit" value="提交" id="send"/><input type="reset" id="res"/>
+	</div>
+</form>
+
+</body>
+</html>

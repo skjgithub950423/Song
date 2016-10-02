@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style type="text/css">
+	div{
+		width: 200px;
+		height: 200px;
+		border: 1px silid black;
+		background: red;
+		/* position: absolute; */
+	}
+</style>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src='jquery-1.7.2.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$("div").click(function(){
+			$(this).toggle();
+		})
+	})
+</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>

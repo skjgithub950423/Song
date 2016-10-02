@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script type="text/javascript" src='jquery-1.7.2.js'></script>
+<script type="text/javascript">
+	$("a[href = 'http://google.com']").click(function(event){
+		var tg = event.target;
+		alert(tg.href);
+		return false;
+	})
+</script>
+</head>
+<body>
+	<a href="http://google.com">google.com</a>
+</body>
+</html>
