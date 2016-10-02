@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		/*
+			字符串转json	
+			
+			需求：json{a:1,b:2,c:3};
+		*/
+		
+		function str2json(str){
+			var arr = str.split('&');
+			var json = {};
+			for(var i=0;i<arr.length;i++){
+				var arr2 = arr[i].split('=');
+				json[arr2[0]] = arr2[1];
+			}
+			return json;
+		}
+		console.log(str2json('a=1&b=2&c=3'));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

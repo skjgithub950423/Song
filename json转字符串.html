@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>15-json2str封装函数</title>
+	<script>
+		/*
+			json转字符串	
+			
+			需求：a=1&b=2&c=3
+		*/
+		
+		function json2str(json){
+			var arr = [];
+			for(var name in json){
+				arr.push(name + '=' + json[name]);
+			}
+			return arr;
+		}
+		console.log(json2str({a:1,b:2,c:3}).join('&'));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
